@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `parse` mod in crate `humanize`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, parse">
+
+    <title>humanize::parse - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
+    <link rel="stylesheet" type="text/css" href="../../main.css">
+    
+
+    
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <nav class="sidebar">
+        
+        <p class='location'><a href='../index.html'>humanize</a></p><script>window.sidebarCurrent = {name: 'parse', ty: 'mod', relpath: '../'};</script><script defer src="../sidebar-items.js"></script>
+    </nav>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content mod">
+<h1 class='fqn'><span class='in-band'>Module <a href='../index.html'>humanize</a>::<wbr><a class='mod' href=''>parse</a></span><span class='out-of-band'><span id='render-detail'>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a id='src-5' class='srclink' href='../../src/humanize/src/parse/mod.rs.html#7-179' title='goto source code'>[src]</a></span></h1>
+<div class='docblock'><p>Human-friendly Parsing</p>
+
+<p>This module provides support for finding human-friendly values
+within some source text. This is typically used for parsing
+input text for prompts that need common data types such as
+instants in time, durations, booleans, etc.</p>
+
+<h1 id='upcoming-breaking-changes' class='section-header'><a href='#upcoming-breaking-changes'>Upcoming Breaking Changes</a></h1>
+<p>The system of using <code>ValueType</code> and <code>HumanValue</code> as seen in
+the current implementation of this library will be going away
+in favor of something else (and depending on another crate)
+in the near future so that we can interoperate with other
+things that need a richer type system.</p>
+
+<h1 id='match-input' class='section-header'><a href='#match-input'>Match Input</a></h1>
+<p>First, you&#39;ll want to construct a parser:</p>
+
+<pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>humanize</span>::<span class='ident'>parse</span>::<span class='ident'>Parser</span>;
+
+<span class='kw'>let</span> <span class='ident'>parser</span> <span class='op'>=</span> <span class='ident'>Parser</span>::<span class='ident'>new</span>();</pre>
+
+<p>Then, you can use that parser to examine some input. You&#39;ll want
+to specify what <a href="trait.ValueType.html">sort of value</a> you are looking for. You may also
+limit the matchers run to a specific language. (Here, we don&#39;t limit
+the languages, so we pass <code>Default::default()</code>.)</p>
+
+<pre class='rust rust-example-rendered'>
+<span class='kw'>let</span> <span class='ident'>matches</span> <span class='op'>=</span> <span class='ident'>parser</span>.<span class='ident'>parse</span>(<span class='string'>&quot;on&quot;</span>, <span class='ident'>ValueType</span>::<span class='ident'>Boolean</span>, <span class='ident'>Default</span>::<span class='ident'>default</span>());
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>matches</span>.<span class='ident'>len</span>(), <span class='number'>1</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>matches</span>[<span class='number'>0</span>].<span class='ident'>value</span>, <span class='ident'>HumanValue</span>::<span class='ident'>Boolean</span>(<span class='boolvalue'>true</span>));</pre>
+
+<h1 id='register-matchers' class='section-header'><a href='#register-matchers'>Register Matchers</a></h1>
+<p>Matchers can be provided to augment the built-in capabilities
+of this library.</p>
+
+<p><em>We will expand upon this in the future once our own infrastructure
+for doing matchers well is in place.</em></p>
+
+<p>...</p>
+</div><h2 id='modules' class='section-header'><a href="#modules">Modules</a></h2>
+<table>
+                       <tr class=' module-item'>
+                           <td><a class='mod' href='english/index.html'
+                                  title='humanize::parse::english'>english</a></td>
+                           <td class='docblock short'>
+                                <p>English Humanization</p>
+                           </td>
+                       </tr></table><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
+<table>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.Match.html'
+                                  title='humanize::parse::Match'>Match</a></td>
+                           <td class='docblock short'>
+                                <p>A possible match for a value within some text.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.Matcher.html'
+                                  title='humanize::parse::Matcher'>Matcher</a></td>
+                           <td class='docblock short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.Parser.html'
+                                  title='humanize::parse::Parser'>Parser</a></td>
+                           <td class='docblock short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.SourceLocation.html'
+                                  title='humanize::parse::SourceLocation'>SourceLocation</a></td>
+                           <td class='docblock short'>
+                                <p>A location within a body of text.</p>
+                           </td>
+                       </tr></table><h2 id='enums' class='section-header'><a href="#enums">Enums</a></h2>
+<table>
+                       <tr class=' module-item'>
+                           <td><a class='enum' href='enum.HumanValue.html'
+                                  title='humanize::parse::HumanValue'>HumanValue</a></td>
+                           <td class='docblock short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='enum' href='enum.ValueType.html'
+                                  title='humanize::parse::ValueType'>ValueType</a></td>
+                           <td class='docblock short'>
+                                
+                           </td>
+                       </tr></table></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
+                </p>
+            </div>
+        </div>
+    </aside>
+
+    
+
+    <script>
+        window.rootPath = "../../";
+        window.currentCrate = "humanize";
+        window.playgroundUrl = "";
+    </script>
+    <script src="../../jquery.js"></script>
+    <script src="../../main.js"></script>
+    
+    <script defer src="../../search-index.js"></script>
+</body>
+</html>
