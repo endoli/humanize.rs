@@ -29,18 +29,17 @@
 //! let parser = Parser::new();
 //! ```
 //!
-//! Then, you can use that parser to examine some input. You'll want
-//! to specify what [sort of value] you are looking for. You may also
-//! limit the matchers run to a specific language. (Here, we don't limit
-//! the languages, so we pass `Default::default()`.)
+//! Then, you can use that parser to examine some input. In the typical
+//! case, you can invoke a type-specific parse method like `parse_boolean`.
+//! You may also limit the matchers run to a specific language. (Here,
+//! we don't limit the languages, so we pass `Default::default()`.)
 //!
 //! ```
-//! # use humanize::parse::{HumanValue, Parser, ValueType};
+//! # use humanize::parse::Parser;
 //! #
 //! # let parser = Parser::new();
-//! let matches = parser.parse("on", ValueType::Boolean, Default::default());
-//! assert_eq!(matches.len(), 1);
-//! assert_eq!(matches[0].value, HumanValue::Boolean(true));
+//! let maybe_bool = parser.parse_boolean("on", Default::default());
+//! assert_eq!(maybe_bool, Some(true));
 //! ```
 //!
 //! # Register Matchers
@@ -52,8 +51,6 @@
 //! for doing matchers well is in place._
 //!
 //! ...
-//!
-//! [sort of value]: trait.ValueType.html
 
 use language_tags::LanguageTag;
 use std::time::{Duration, Instant};
@@ -154,6 +151,18 @@ impl<'p> Parser<'p> {
             }
         }
         matches
+    }
+
+    /// Parse `text`, looking for a `bool` value.
+    ///
+    /// If you don't want to limit the matching to a particular language,
+    /// pass `Default::default()` for the `language`.
+    pub fn parse_boolean(&self, text: &str, language: LanguageTag) -> Option<bool> {
+        let matches = self.parse(text, ValueType::Boolean, language);
+        match matches.first().map(|ref m| &m.value) {
+            Some(&HumanValue::Boolean(val)) => Some(val),
+            _ => None,
+        }
     }
 }
 
