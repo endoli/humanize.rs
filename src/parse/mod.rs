@@ -136,10 +136,6 @@ impl<'p> Parser<'p> {
     /// The resulting collection of matches will be ordered by their
     /// weight of likelihood with the most likely first.
     ///
-    ///
-    /// TODO: Should we return a `Result` with specific errors for
-    /// things like 'No valid matchers'?
-    ///
     /// [desired type]: enum.ValueType.html
     pub fn parse(&self, text: &str, desired: ValueType, language: LanguageTag) -> Vec<Match> {
         let mut matches = vec![];
