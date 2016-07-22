@@ -60,16 +60,6 @@ use std::time::{Duration, Instant};
 
 pub mod english;
 
-/// A location within a body of text.
-#[derive(Debug)]
-pub struct SourceLocation {
-    /// The starting offset into the text of the match.
-    pub start: usize,
-
-    /// The ending offset into the text of the match.
-    pub end: usize,
-}
-
 #[allow(missing_docs)]
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub enum ValueType {
@@ -109,9 +99,6 @@ pub struct Match {
     /// Should it be an enum with values like 'Likely', 'Unlikely',
     /// and 'Certain'?
     pub weight: i32,
-
-    /// Location of the match within the text.
-    pub location: SourceLocation,
 }
 
 #[allow(missing_docs)]

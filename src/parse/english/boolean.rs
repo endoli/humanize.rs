@@ -19,11 +19,10 @@ pub fn register(parser: &mut Parser) {
         language: langtag!(en),
         result_type: ValueType::Boolean,
         matcher: Box::new(move |_text: &str| -> Option<Match> {
-            return Some(Match {
-                location: SourceLocation { start: 0, end: 0 },
-                weight: 100,
+            Some(Match {
                 value: HumanValue::Boolean(true),
-            });
+                weight: 100,
+            })
         }),
     });
 }
