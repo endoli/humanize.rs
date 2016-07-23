@@ -41,14 +41,12 @@
 //!
 //! Then, you can use that parser to examine some input. In the typical
 //! case, you can invoke a type-specific parse method like `parse_boolean`.
-//! You may also limit the matchers run to a specific language. (Here,
-//! we don't limit the languages, so we pass `Default::default()`.)
 //!
 //! ```
 //! # use humanize::HumanizedParser;
 //! #
 //! # let parser = HumanizedParser::new();
-//! let enabled = parser.parse_boolean("on", Default::default()).unwrap_or(false);
+//! let enabled = parser.parse_boolean("on").unwrap_or(false);
 //! assert_eq!(enabled, true);
 //! ```
 //!

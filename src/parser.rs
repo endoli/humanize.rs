@@ -18,6 +18,9 @@ pub struct HumanizedParser<'p> {
     ///
     /// Use `HumanizedParser.register_matcher` to add a new matcher.
     matchers: Vec<Matcher<'p>>,
+
+    /// The language being supported by this parser.
+    language: LanguageTag,
 }
 
 impl<'p> HumanizedParser<'p> {
@@ -28,23 +31,22 @@ impl<'p> HumanizedParser<'p> {
 
     /// Construct a new parser, but without any of the default matchers.
     pub fn new_without_default_matchers() -> Self {
-        HumanizedParser { matchers: vec![] }
+        HumanizedParser {
+            matchers: vec![],
+            language: Default::default(),
+        }
     }
 
     /// Parse `text`, looking for a `bool` value.
-    ///
-    /// If you don't want to limit the matching to a particular language,
-    /// pass `Default::default()` for the `language`.
-    pub fn parse_boolean(&self, text: &str, language: LanguageTag) -> Option<bool> {
-        let matches = self.parse(text, ValueType::Boolean, language);
+    pub fn parse_boolean(&self, text: &str) -> Option<bool> {
+        let matches = self.parse(text, ValueType::Boolean);
         match matches.first().map(|ref m| &m.value) {
             Some(&HumanValue::Boolean(val)) => Some(val),
             _ => None,
         }
     }
 
-    /// Parse `text`, looking for a value of the [desired type],  using
-    /// the optionally provided language.
+    /// Parse `text`, looking for a value of the [desired type].
     ///
     /// The resulting collection of matches will be ordered by their
     /// weight of likelihood with the most likely first.
@@ -53,10 +55,10 @@ impl<'p> HumanizedParser<'p> {
     /// use type-specific methods like `parse_boolean`.
     ///
     /// [desired type]: matchers/enum.ValueType.html
-    pub fn parse(&self, text: &str, desired: ValueType, language: LanguageTag) -> Vec<Match> {
+    pub fn parse(&self, text: &str, desired: ValueType) -> Vec<Match> {
         let mut matches = vec![];
         for matcher in &self.matchers {
-            if matcher.result_type == desired && language.matches(&matcher.language) {
+            if matcher.result_type == desired {
                 if let Some(m) = (matcher.matcher)(text) {
                     matches.push(m);
                 }
@@ -66,14 +68,28 @@ impl<'p> HumanizedParser<'p> {
     }
 
     /// Install a new `Matcher` to be used by this parser.
-    pub fn register_matcher(&mut self, matcher: Matcher<'p>) {
-        self.matchers.push(matcher);
+    ///
+    /// If the matcher's language does not match the parser's
+    /// language, it will not be added.
+    ///
+    /// The return type indicates whether or not the matcher
+    /// was added to the parser.
+    pub fn register_matcher(&mut self, matcher: Matcher<'p>) -> bool {
+        if self.language.matches(&matcher.language) {
+            self.matchers.push(matcher);
+            true
+        } else {
+            false
+        }
     }
 }
 
 impl<'p> Default for HumanizedParser<'p> {
     fn default() -> Self {
-        let mut p = HumanizedParser { matchers: vec![] };
+        let mut p = HumanizedParser {
+            matchers: vec![],
+            language: Default::default(),
+        };
         english::register(&mut p);
         p
     }
