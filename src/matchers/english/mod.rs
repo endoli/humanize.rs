@@ -6,7 +6,7 @@
 
 //! English Humanization
 
-use parser::HumanizedParser;
+use parser::Parser;
 
 pub mod boolean;
 // pub mod ordinal;
@@ -14,7 +14,7 @@ pub mod boolean;
 /// Register all of the English language matchers.
 ///
 /// This doesn't need to be invoked directly typically. This will
-/// be called when creating a default `HumanizedParser`.
-pub fn register(parser: &mut HumanizedParser) {
+/// be called when creating a default `Parser`.
+pub fn register(parser: &mut Parser) {
     boolean::register(parser);
 }

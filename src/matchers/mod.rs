@@ -44,7 +44,7 @@ pub enum HumanValue {
 /// A `Match` result is obtained by calling [`parse`] on
 /// some input text. They are created by [`Matcher`]s.
 ///
-/// [`parse`]: ../struct.HumanizedParser.html#method.parse
+/// [`parse`]: ../struct.Parser.html#method.parse
 /// [`Matcher`]: struct.Matcher.html
 #[derive(Debug)]
 pub struct Match {

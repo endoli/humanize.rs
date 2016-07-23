@@ -10,13 +10,13 @@
 // much better and actually work correctly. :)
 
 use matchers::*;
-use parser::HumanizedParser;
+use parser::Parser;
 
 /// Register matchers for English expressions for boolean values.
 ///
 /// This doesn't need to be invoked directly typically. This will
 /// be called by `humanize::matchers::english::register`.
-pub fn register(parser: &mut HumanizedParser) {
+pub fn register(parser: &mut Parser) {
     parser.register_matcher(Matcher {
         name: "English Booleans",
         language: langtag!(en),

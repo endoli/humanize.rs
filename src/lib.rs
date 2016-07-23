@@ -34,18 +34,14 @@
 //! First, you'll want to construct a parser:
 //!
 //! ```
-//! use humanize::HumanizedParser;
-//!
-//! let parser = HumanizedParser::new();
+//! let parser = humanize::Parser::new();
 //! ```
 //!
 //! Then, you can use that parser to examine some input. In the typical
 //! case, you can invoke a type-specific parse method like `parse_boolean`.
 //!
 //! ```
-//! # use humanize::HumanizedParser;
-//! #
-//! # let parser = HumanizedParser::new();
+//! let parser = humanize::Parser::new();
 //! let enabled = parser.parse_boolean("on").unwrap_or(false);
 //! assert_eq!(enabled, true);
 //! ```
@@ -75,4 +71,4 @@ extern crate language_tags;
 pub mod matchers;
 mod parser;
 
-pub use parser::HumanizedParser;
+pub use parser::Parser;

@@ -13,17 +13,17 @@ use matchers::*;
 /// by default when the parser is created. A parser without pre-installed
 /// matchers can be created with `new_without_default_matchers`. Additional
 /// or custom matchers can be added with `register_matcher`.
-pub struct HumanizedParser<'p> {
+pub struct Parser<'p> {
     /// The matchers which have been registered with this parser.
     ///
-    /// Use `HumanizedParser.register_matcher` to add a new matcher.
+    /// Use `Parser.register_matcher` to add a new matcher.
     matchers: Vec<Matcher<'p>>,
 
     /// The language being supported by this parser.
     language: LanguageTag,
 }
 
-impl<'p> HumanizedParser<'p> {
+impl<'p> Parser<'p> {
     /// Construct a new parser, including the default matchers.
     pub fn new() -> Self {
         Default::default()
@@ -31,7 +31,7 @@ impl<'p> HumanizedParser<'p> {
 
     /// Construct a new parser, but without any of the default matchers.
     pub fn new_without_default_matchers() -> Self {
-        HumanizedParser {
+        Parser {
             matchers: vec![],
             language: Default::default(),
         }
@@ -84,9 +84,9 @@ impl<'p> HumanizedParser<'p> {
     }
 }
 
-impl<'p> Default for HumanizedParser<'p> {
+impl<'p> Default for Parser<'p> {
     fn default() -> Self {
-        let mut p = HumanizedParser {
+        let mut p = Parser {
             matchers: vec![],
             language: Default::default(),
         };
