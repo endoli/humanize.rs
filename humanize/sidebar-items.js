@@ -1,1 +1,1 @@
-initSidebarItems({"mod":[["parse","Human-friendly Parsing"]]});
+initSidebarItems({"mod":[["matchers","Register Matchers"]],"struct":[["HumanizedParser","Parse text input by a human and return a primitive value."]]});

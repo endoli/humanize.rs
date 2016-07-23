@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `src/parse/english/boolean.rs`.">
+    <meta name="description" content="Source to the Rust file `src/matchers/english/boolean.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>boolean.rs.html -- source</title>
@@ -71,6 +71,8 @@
 <span id="27">27</span>
 <span id="28">28</span>
 <span id="29">29</span>
+<span id="30">30</span>
+<span id="31">31</span>
 </pre><pre class='rust '>
 <span class='comment'>// Licensed under the Apache License, Version 2.0 &lt;LICENSE-APACHE or</span>
 <span class='comment'>// http://www.apache.org/licenses/LICENSE-2.0&gt; or the MIT license</span>
@@ -80,24 +82,26 @@
 
 <span class='doccomment'>//! Booleans - English Humanization</span>
 
-
 <span class='comment'>// This is just a dummy example for now. It should clearly be</span>
 <span class='comment'>// much better and actually work correctly. :)</span>
 
-<span class='kw'>use</span> <span class='ident'>parse</span>::<span class='op'>*</span>;
+<span class='kw'>use</span> <span class='ident'>matchers</span>::<span class='op'>*</span>;
+<span class='kw'>use</span> <span class='ident'>parser</span>::<span class='ident'>HumanizedParser</span>;
 
-<span class='attribute'>#[<span class='ident'>allow</span>(<span class='ident'>missing_docs</span>)]</span>
-<span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>register</span>(<span class='ident'>parser</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>Parser</span>) {
+<span class='doccomment'>/// Register matchers for English expressions for boolean values.</span>
+<span class='doccomment'>///</span>
+<span class='doccomment'>/// This doesn&#39;t need to be invoked directly typically. This will</span>
+<span class='doccomment'>/// be called by `humanize::matchers::english::register`.</span>
+<span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>register</span>(<span class='ident'>parser</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>HumanizedParser</span>) {
     <span class='ident'>parser</span>.<span class='ident'>register_matcher</span>(<span class='ident'>Matcher</span> {
         <span class='ident'>name</span>: <span class='string'>&quot;English Booleans&quot;</span>,
         <span class='ident'>language</span>: <span class='macro'>langtag</span><span class='macro'>!</span>(<span class='ident'>en</span>),
         <span class='ident'>result_type</span>: <span class='ident'>ValueType</span>::<span class='ident'>Boolean</span>,
         <span class='ident'>matcher</span>: <span class='ident'>Box</span>::<span class='ident'>new</span>(<span class='kw'>move</span> <span class='op'>|</span><span class='ident'>_text</span>: <span class='kw-2'>&amp;</span><span class='ident'>str</span><span class='op'>|</span> <span class='op'>-&gt;</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>Match</span><span class='op'>&gt;</span> {
-            <span class='kw'>return</span> <span class='prelude-val'>Some</span>(<span class='ident'>Match</span> {
-                <span class='ident'>location</span>: <span class='ident'>SourceLocation</span> { <span class='ident'>start</span>: <span class='number'>0</span>, <span class='ident'>end</span>: <span class='number'>0</span> },
-                <span class='ident'>weight</span>: <span class='number'>100</span>,
+            <span class='prelude-val'>Some</span>(<span class='ident'>Match</span> {
                 <span class='ident'>value</span>: <span class='ident'>HumanValue</span>::<span class='ident'>Boolean</span>(<span class='boolvalue'>true</span>),
-            });
+                <span class='ident'>weight</span>: <span class='number'>100</span>,
+            })
         }),
     });
 }

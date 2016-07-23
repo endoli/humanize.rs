@@ -75,6 +75,51 @@
 <span id="31">31</span>
 <span id="32">32</span>
 <span id="33">33</span>
+<span id="34">34</span>
+<span id="35">35</span>
+<span id="36">36</span>
+<span id="37">37</span>
+<span id="38">38</span>
+<span id="39">39</span>
+<span id="40">40</span>
+<span id="41">41</span>
+<span id="42">42</span>
+<span id="43">43</span>
+<span id="44">44</span>
+<span id="45">45</span>
+<span id="46">46</span>
+<span id="47">47</span>
+<span id="48">48</span>
+<span id="49">49</span>
+<span id="50">50</span>
+<span id="51">51</span>
+<span id="52">52</span>
+<span id="53">53</span>
+<span id="54">54</span>
+<span id="55">55</span>
+<span id="56">56</span>
+<span id="57">57</span>
+<span id="58">58</span>
+<span id="59">59</span>
+<span id="60">60</span>
+<span id="61">61</span>
+<span id="62">62</span>
+<span id="63">63</span>
+<span id="64">64</span>
+<span id="65">65</span>
+<span id="66">66</span>
+<span id="67">67</span>
+<span id="68">68</span>
+<span id="69">69</span>
+<span id="70">70</span>
+<span id="71">71</span>
+<span id="72">72</span>
+<span id="73">73</span>
+<span id="74">74</span>
+<span id="75">75</span>
+<span id="76">76</span>
+<span id="77">77</span>
+<span id="78">78</span>
 </pre><pre class='rust '>
 <span class='comment'>// Licensed under the Apache License, Version 2.0 &lt;LICENSE-APACHE or</span>
 <span class='comment'>// http://www.apache.org/licenses/LICENSE-2.0&gt; or the MIT license</span>
@@ -83,6 +128,8 @@
 <span class='comment'>// except according to those terms.</span>
 
 <span class='doccomment'>//! # Humanize</span>
+<span class='doccomment'>//!</span>
+<span class='doccomment'>//! Make your user interface more human friendly!</span>
 <span class='doccomment'>//!</span>
 <span class='doccomment'>//! This library provides functionality for both formatting values</span>
 <span class='doccomment'>//! into human friendly forms as well as parsing human input to get</span>
@@ -93,12 +140,52 @@
 <span class='doccomment'>//!</span>
 <span class='doccomment'>//! This library is inspired by many other things, including:</span>
 <span class='doccomment'>//!</span>
-<span class='doccomment'>//! * Python&#39;s humanize library.</span>
-<span class='doccomment'>//! * JavaScript&#39;s moment.js.</span>
-<span class='doccomment'>//! * The &#39;at&#39; command&#39;s input parsing.</span>
+<span class='doccomment'>//! * Python&#39;s [humanize library].</span>
+<span class='doccomment'>//! * JavaScript&#39;s [moment.js].</span>
+<span class='doccomment'>//! * The [&#39;at&#39; command]&#39;s input parsing.</span>
 <span class='doccomment'>//!</span>
 <span class='doccomment'>//! Contributions extending our functionality are welcome, as are</span>
 <span class='doccomment'>//! contributions that add support for additional languages.</span>
+<span class='doccomment'>//!</span>
+<span class='doccomment'>//! # Human-friendly Parsing</span>
+<span class='doccomment'>//!</span>
+<span class='doccomment'>//! When dealing with humans, you often want them to be able to</span>
+<span class='doccomment'>//! input values in a flexible manner. For example, you might want</span>
+<span class='doccomment'>//! to be able to input a `bool` using text like `&quot;on&quot;`, `&quot;off&quot;`,</span>
+<span class='doccomment'>//! `&quot;yes&quot;`, `&quot;no&quot;` or perhaps even `&quot;nope&quot;`.</span>
+<span class='doccomment'>//!</span>
+<span class='doccomment'>//! First, you&#39;ll want to construct a parser:</span>
+<span class='doccomment'>//!</span>
+<span class='doccomment'>//! ```</span>
+<span class='doccomment'>//! use humanize::HumanizedParser;</span>
+<span class='doccomment'>//!</span>
+<span class='doccomment'>//! let parser = HumanizedParser::new();</span>
+<span class='doccomment'>//! ```</span>
+<span class='doccomment'>//!</span>
+<span class='doccomment'>//! Then, you can use that parser to examine some input. In the typical</span>
+<span class='doccomment'>//! case, you can invoke a type-specific parse method like `parse_boolean`.</span>
+<span class='doccomment'>//!</span>
+<span class='doccomment'>//! ```</span>
+<span class='doccomment'>//! # use humanize::HumanizedParser;</span>
+<span class='doccomment'>//! #</span>
+<span class='doccomment'>//! # let parser = HumanizedParser::new();</span>
+<span class='doccomment'>//! let enabled = parser.parse_boolean(&quot;on&quot;).unwrap_or(false);</span>
+<span class='doccomment'>//! assert_eq!(enabled, true);</span>
+<span class='doccomment'>//! ```</span>
+<span class='doccomment'>//!</span>
+<span class='doccomment'>//! The parser stores no state related to an actual parse operation. It</span>
+<span class='doccomment'>//! simply stores the matchers which have been registered, so this can</span>
+<span class='doccomment'>//! and should be cached and used across multiple parse operations.</span>
+<span class='doccomment'>//!</span>
+<span class='doccomment'>//! # Ideas for the Future</span>
+<span class='doccomment'>//!</span>
+<span class='doccomment'>//! * Actually implement formatting.</span>
+<span class='doccomment'>//! * Color input. Allow inputting a color using a wide variety of color</span>
+<span class='doccomment'>//!   names, such as those from CSS.</span>
+<span class='doccomment'>//!</span>
+<span class='doccomment'>//! [humanize library]: https://pypi.python.org/pypi/humanize</span>
+<span class='doccomment'>//! [moment.js]: http://momentjs.com/</span>
+<span class='doccomment'>//! [&#39;at&#39; command]: http://www.computerhope.com/unix/uat.htm</span>
 
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>warn</span>(<span class='ident'>missing_docs</span>)]</span>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>deny</span>(<span class='ident'>trivial_numeric_casts</span>,
@@ -108,7 +195,10 @@
 <span class='attribute'>#[<span class='ident'>macro_use</span>]</span>
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>language_tags</span>;
 
-<span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>parse</span>;
+<span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>matchers</span>;
+<span class='kw'>mod</span> <span class='ident'>parser</span>;
+
+<span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>parser</span>::<span class='ident'>HumanizedParser</span>;
 </pre>
 </section>
     <section id='search' class="content hidden"></section>
