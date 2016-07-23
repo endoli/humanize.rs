@@ -10,10 +10,11 @@
 // This is just a dummy example for now. It should clearly be
 // much better and actually work correctly. :)
 
-use parse::*;
+use matchers::*;
+use parser::HumanizedParser;
 
 #[allow(missing_docs)]
-pub fn register(parser: &mut Parser) {
+pub fn register(parser: &mut HumanizedParser) {
     parser.register_matcher(Matcher {
         name: "English Booleans",
         language: langtag!(en),

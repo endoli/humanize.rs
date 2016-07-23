@@ -6,6 +6,8 @@
 
 //! # Humanize
 //!
+//! Make your user interface more human friendly!
+//!
 //! This library provides functionality for both formatting values
 //! into human friendly forms as well as parsing human input to get
 //! back likely values.
@@ -21,6 +23,38 @@
 //!
 //! Contributions extending our functionality are welcome, as are
 //! contributions that add support for additional languages.
+//!
+//! # Human-friendly Parsing
+//!
+//! When dealing with humans, you often want them to be able to
+//! input values in a flexible manner. For example, you might want
+//! to be able to input a `bool` using text like `"on"`, `"off"`,
+//! `"yes"`, `"no"` or perhaps even `"nope"`.
+//!
+//! First, you'll want to construct a parser:
+//!
+//! ```
+//! use humanize::HumanizedParser;
+//!
+//! let parser = HumanizedParser::new();
+//! ```
+//!
+//! Then, you can use that parser to examine some input. In the typical
+//! case, you can invoke a type-specific parse method like `parse_boolean`.
+//! You may also limit the matchers run to a specific language. (Here,
+//! we don't limit the languages, so we pass `Default::default()`.)
+//!
+//! ```
+//! # use humanize::HumanizedParser;
+//! #
+//! # let parser = HumanizedParser::new();
+//! let enabled = parser.parse_boolean("on", Default::default()).unwrap_or(false);
+//! assert_eq!(enabled, true);
+//! ```
+//!
+//! The parser stores no state related to an actual parse operation. It
+//! simply stores the matchers which have been registered, so this can
+//! and should be cached and used across multiple parse operations.
 
 #![warn(missing_docs)]
 #![deny(trivial_numeric_casts,
@@ -30,4 +64,7 @@
 #[macro_use]
 extern crate language_tags;
 
-pub mod parse;
+pub mod matchers;
+mod parser;
+
+pub use parser::HumanizedParser;

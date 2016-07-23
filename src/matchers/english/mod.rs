@@ -6,12 +6,12 @@
 
 //! English Humanization
 
-use parse::Parser;
+use parser::HumanizedParser;
 
 pub mod boolean;
 // pub mod ordinal;
 
 /// Register all of the English language matchers.
-pub fn register(parser: &mut Parser) {
+pub fn register(parser: &mut HumanizedParser) {
     boolean::register(parser);
 }
