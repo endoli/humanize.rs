@@ -6,14 +6,16 @@
 
 //! Booleans - English Humanization
 
-
 // This is just a dummy example for now. It should clearly be
 // much better and actually work correctly. :)
 
 use matchers::*;
 use parser::HumanizedParser;
 
-#[allow(missing_docs)]
+/// Register matchers for English expressions for boolean values.
+///
+/// This doesn't need to be invoked directly typically. This will
+/// be called by `humanize::matchers::english::register`.
 pub fn register(parser: &mut HumanizedParser) {
     parser.register_matcher(Matcher {
         name: "English Booleans",

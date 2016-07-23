@@ -12,6 +12,9 @@ pub mod boolean;
 // pub mod ordinal;
 
 /// Register all of the English language matchers.
+///
+/// This doesn't need to be invoked directly typically. This will
+/// be called when creating a default `HumanizedParser`.
 pub fn register(parser: &mut HumanizedParser) {
     boolean::register(parser);
 }

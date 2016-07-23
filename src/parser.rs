@@ -7,7 +7,12 @@
 use language_tags::LanguageTag;
 use matchers::*;
 
-#[allow(missing_docs)]
+/// Parse text input by a human and return a primitive value.
+///
+/// The actual matching is done by `Matcher` objects which are installed
+/// by default when the parser is created. A parser without pre-installed
+/// matchers can be created with `new_without_default_matchers`. Additional
+/// or custom matchers can be added with `register_matcher`.
 pub struct HumanizedParser<'p> {
     /// The matchers which have been registered with this parser.
     ///
@@ -60,7 +65,7 @@ impl<'p> HumanizedParser<'p> {
         matches
     }
 
-    #[allow(missing_docs)]
+    /// Install a new `Matcher` to be used by this parser.
     pub fn register_matcher(&mut self, matcher: Matcher<'p>) {
         self.matchers.push(matcher);
     }
