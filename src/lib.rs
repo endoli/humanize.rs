@@ -17,9 +17,9 @@
 //!
 //! This library is inspired by many other things, including:
 //!
-//! * Python's humanize library.
-//! * JavaScript's moment.js.
-//! * The 'at' command's input parsing.
+//! * Python's [humanize library].
+//! * JavaScript's [moment.js].
+//! * The ['at' command]'s input parsing.
 //!
 //! Contributions extending our functionality are welcome, as are
 //! contributions that add support for additional languages.
@@ -55,6 +55,10 @@
 //! The parser stores no state related to an actual parse operation. It
 //! simply stores the matchers which have been registered, so this can
 //! and should be cached and used across multiple parse operations.
+//!
+//! [humanize library]: https://pypi.python.org/pypi/humanize
+//! [moment.js]: http://momentjs.com/
+//! ['at' command]: http://www.computerhope.com/unix/uat.htm
 
 #![warn(missing_docs)]
 #![deny(trivial_numeric_casts,
