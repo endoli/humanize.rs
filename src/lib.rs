@@ -54,6 +54,12 @@
 //! simply stores the matchers which have been registered, so this can
 //! and should be cached and used across multiple parse operations.
 //!
+//! # Ideas for the Future
+//!
+//! * Actually implement formatting.
+//! * Color input. Allow inputting a color using a wide variety of color
+//!   names, such as those from CSS.
+//!
 //! [humanize library]: https://pypi.python.org/pypi/humanize
 //! [moment.js]: http://momentjs.com/
 //! ['at' command]: http://www.computerhope.com/unix/uat.htm
