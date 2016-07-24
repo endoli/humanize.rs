@@ -21,11 +21,8 @@ pub fn register(parser: &mut Parser) {
         name: "English Booleans",
         language: langtag!(en),
         result_type: ValueType::Boolean,
-        matcher: Box::new(move |_text: &str| -> Option<Match> {
-            Some(Match {
-                value: HumanValue::Boolean(true),
-                weight: 100,
-            })
+        matcher: Box::new(move |_text: &str| -> Option<HumanValue> {
+            Some(HumanValue::Boolean(true))
         }),
     });
 }

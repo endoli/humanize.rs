@@ -39,32 +39,27 @@ impl<'p> Parser<'p> {
 
     /// Parse `text`, looking for a `bool` value.
     pub fn parse_boolean(&self, text: &str) -> Option<bool> {
-        let matches = self.parse(text, ValueType::Boolean);
-        match matches.first().map(|ref m| &m.value) {
-            Some(&HumanValue::Boolean(val)) => Some(val),
+        match self.parse(text, ValueType::Boolean) {
+            Some(HumanValue::Boolean(val)) => Some(val),
             _ => None,
         }
     }
 
     /// Parse `text`, looking for a value of the [desired type].
     ///
-    /// The resulting collection of matches will be ordered by their
-    /// weight of likelihood with the most likely first.
-    ///
     /// You won't typically invoke this directly, instead preferring to
     /// use type-specific methods like `parse_boolean`.
     ///
     /// [desired type]: matchers/enum.ValueType.html
-    pub fn parse(&self, text: &str, desired: ValueType) -> Vec<Match> {
-        let mut matches = vec![];
+    pub fn parse(&self, text: &str, desired: ValueType) -> Option<HumanValue> {
         for matcher in &self.matchers {
             if matcher.result_type == desired {
                 if let Some(m) = (matcher.matcher)(text) {
-                    matches.push(m);
+                    return Some(m);
                 }
             }
         }
-        matches
+        None
     }
 
     /// Install a new `Matcher` to be used by this parser.
