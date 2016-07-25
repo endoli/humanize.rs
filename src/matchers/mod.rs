@@ -15,7 +15,6 @@
 //! ...
 
 use language_tags::LanguageTag;
-use std::time::{Duration, Instant};
 
 pub mod english;
 
@@ -23,20 +22,14 @@ pub mod english;
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub enum ValueType {
     Boolean,
-    Duration,
-    Instant,
     Integer,
-    Ordinal,
 }
 
 #[allow(missing_docs)]
 #[derive(Debug, PartialEq)]
 pub enum HumanValue {
     Boolean(bool),
-    Duration(Duration),
-    Instant(Instant),
     Integer(i64),
-    Ordinal(i64),
 }
 
 #[allow(missing_docs)]
