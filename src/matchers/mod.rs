@@ -40,8 +40,7 @@ pub enum HumanValue {
 }
 
 #[allow(missing_docs)]
-pub struct Matcher<'m> {
-    pub name: &'m str,
+pub struct Matcher {
     pub language: LanguageTag,
     pub result_type: ValueType,
     pub matcher: Box<Fn(&str) -> Option<HumanValue>>,

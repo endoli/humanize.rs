@@ -18,7 +18,6 @@ use parser::Parser;
 /// be called by `humanize::matchers::english::register`.
 pub fn register(parser: &mut Parser) {
     parser.register_matcher(Matcher {
-        name: "English Booleans",
         language: langtag!(en),
         result_type: ValueType::Boolean,
         matcher: Box::new(match_boolean),

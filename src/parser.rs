@@ -13,17 +13,17 @@ use matchers::*;
 /// by default when the parser is created. A parser without pre-installed
 /// matchers can be created with `new_without_default_matchers`. Additional
 /// or custom matchers can be added with `register_matcher`.
-pub struct Parser<'p> {
+pub struct Parser {
     /// The matchers which have been registered with this parser.
     ///
     /// Use `Parser.register_matcher` to add a new matcher.
-    matchers: Vec<Matcher<'p>>,
+    matchers: Vec<Matcher>,
 
     /// The language being supported by this parser.
     language: LanguageTag,
 }
 
-impl<'p> Parser<'p> {
+impl Parser {
     /// Construct a new parser, including the default matchers.
     pub fn new() -> Self {
         Default::default()
@@ -69,7 +69,7 @@ impl<'p> Parser<'p> {
     ///
     /// The return type indicates whether or not the matcher
     /// was added to the parser.
-    pub fn register_matcher(&mut self, matcher: Matcher<'p>) -> bool {
+    pub fn register_matcher(&mut self, matcher: Matcher) -> bool {
         if self.language.matches(&matcher.language) {
             self.matchers.push(matcher);
             true
@@ -79,7 +79,7 @@ impl<'p> Parser<'p> {
     }
 }
 
-impl<'p> Default for Parser<'p> {
+impl Default for Parser {
     fn default() -> Self {
         let mut p = Parser {
             matchers: vec![],
