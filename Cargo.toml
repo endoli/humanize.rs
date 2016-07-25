@@ -5,7 +5,7 @@ authors = ["Bruce Mitchener <bruce.mitchener@gmail.com>"]
 license = "MIT/Apache-2.0"
 readme = "README.md"
 description = "Convert common things to humanized output. Parse input text in a human-friendly way."
-keywords = ["humanize", "human"]
+keywords = ["humanize", "human", "parse", "format"]
 homepage = "https://github.com/endoli/humanize.rs"
 repository = "https://github.com/endoli/humanize.rs"
 
