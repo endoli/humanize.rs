@@ -4,13 +4,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="API documentation for the Rust `Matcher` struct in crate `humanize`.">
-    <meta name="keywords" content="rust, rustlang, rust-lang, Matcher">
+    <meta name="description" content="API documentation for the Rust `parse` fn in crate `humanize`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, parse">
 
-    <title>humanize::matchers::Matcher - Rust</title>
+    <title>humanize::parse - Rust</title>
 
-    <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
-    <link rel="stylesheet" type="text/css" href="../../main.css">
+    <link rel="stylesheet" type="text/css" href="../rustdoc.css">
+    <link rel="stylesheet" type="text/css" href="../main.css">
     
 
     
@@ -28,7 +28,7 @@
 
     <nav class="sidebar">
         
-        <p class='location'><a href='../index.html'>humanize</a>::<wbr><a href='index.html'>matchers</a></p><script>window.sidebarCurrent = {name: 'Matcher', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+        <p class='location'><a href='index.html'>humanize</a></p><script>window.sidebarCurrent = {name: 'parse', ty: 'fn', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </nav>
 
     <nav class="sub">
@@ -42,23 +42,17 @@
         </form>
     </nav>
 
-    <section id='main' class="content struct">
-<h1 class='fqn'><span class='in-band'>Struct <a href='../index.html'>humanize</a>::<wbr><a href='index.html'>matchers</a>::<wbr><a class='struct' href=''>Matcher</a></span><span class='out-of-band'><span id='render-detail'>
+    <section id='main' class="content fn">
+<h1 class='fqn'><span class='in-band'>Function <a href='index.html'>humanize</a>::<wbr><a class='fn' href=''>parse</a></span><span class='out-of-band'><span id='render-detail'>
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a id='src-116' class='srclink' href='../../src/humanize/src/matchers/mod.rs.html#65-70' title='goto source code'>[src]</a></span></h1>
-<pre class='rust struct'>pub struct Matcher&lt;'m&gt; {
-    pub name: &amp;'m <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>,
-    pub language: <a class='struct' href='../../language_tags/struct.LanguageTag.html' title='language_tags::LanguageTag'>LanguageTag</a>,
-    pub result_type: <a class='enum' href='../../humanize/matchers/enum.ValueType.html' title='humanize::matchers::ValueType'>ValueType</a>,
-    pub matcher: <a class='struct' href='https://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html' title='alloc::boxed::Box'>Box</a>&lt;<a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.Fn.html' title='core::ops::Fn'>Fn</a>(&amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='../../humanize/matchers/struct.Match.html' title='humanize::matchers::Match'>Match</a>&gt;&gt;,
-}</pre><h2 class='fields'>Fields</h2>
-<table><tr class='stab '>
-                             <td id='structfield.name'><code>name</code></td><td></td></tr><tr class='stab '>
-                             <td id='structfield.language'><code>language</code></td><td></td></tr><tr class='stab '>
-                             <td id='structfield.result_type'><code>result_type</code></td><td></td></tr><tr class='stab '>
-                             <td id='structfield.matcher'><code>matcher</code></td><td></td></tr></table></section>
+               </span><a id='src-21' class='srclink' href='../src/humanize/src/parser.rs.html#19-22' title='goto source code'>[src]</a></span></h1>
+<pre class='rust fn'>pub fn parse&lt;T: <a class='trait' href='../humanize/trait.Parse.html' title='humanize::Parse'>Parse</a>&gt;(text: &amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;T&gt;</pre><div class='docblock'><p>Construct a value by parsing humanized text.</p>
+
+<p>This uses a wild card for the language, so text in any language
+supported by the library should work.</p>
+</div></section>
     <section id='search' class="content hidden"></section>
 
     <section class="footer"></section>
@@ -112,13 +106,13 @@
     
 
     <script>
-        window.rootPath = "../../";
+        window.rootPath = "../";
         window.currentCrate = "humanize";
         window.playgroundUrl = "";
     </script>
-    <script src="../../jquery.js"></script>
-    <script src="../../main.js"></script>
+    <script src="../jquery.js"></script>
+    <script src="../main.js"></script>
     
-    <script defer src="../../search-index.js"></script>
+    <script defer src="../search-index.js"></script>
 </body>
 </html>

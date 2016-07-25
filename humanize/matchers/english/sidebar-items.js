@@ -1,1 +1,0 @@
-initSidebarItems({"fn":[["register","Register all of the English language matchers."]],"mod":[["boolean","Booleans - English Humanization"]]});

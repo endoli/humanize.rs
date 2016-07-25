@@ -100,26 +100,6 @@
 <span id="56">56</span>
 <span id="57">57</span>
 <span id="58">58</span>
-<span id="59">59</span>
-<span id="60">60</span>
-<span id="61">61</span>
-<span id="62">62</span>
-<span id="63">63</span>
-<span id="64">64</span>
-<span id="65">65</span>
-<span id="66">66</span>
-<span id="67">67</span>
-<span id="68">68</span>
-<span id="69">69</span>
-<span id="70">70</span>
-<span id="71">71</span>
-<span id="72">72</span>
-<span id="73">73</span>
-<span id="74">74</span>
-<span id="75">75</span>
-<span id="76">76</span>
-<span id="77">77</span>
-<span id="78">78</span>
 </pre><pre class='rust '>
 <span class='comment'>// Licensed under the Apache License, Version 2.0 &lt;LICENSE-APACHE or</span>
 <span class='comment'>// http://www.apache.org/licenses/LICENSE-2.0&gt; or the MIT license</span>
@@ -154,34 +134,14 @@
 <span class='doccomment'>//! to be able to input a `bool` using text like `&quot;on&quot;`, `&quot;off&quot;`,</span>
 <span class='doccomment'>//! `&quot;yes&quot;`, `&quot;no&quot;` or perhaps even `&quot;nope&quot;`.</span>
 <span class='doccomment'>//!</span>
-<span class='doccomment'>//! First, you&#39;ll want to construct a parser:</span>
-<span class='doccomment'>//!</span>
 <span class='doccomment'>//! ```</span>
-<span class='doccomment'>//! use humanize::HumanizedParser;</span>
-<span class='doccomment'>//!</span>
-<span class='doccomment'>//! let parser = HumanizedParser::new();</span>
-<span class='doccomment'>//! ```</span>
-<span class='doccomment'>//!</span>
-<span class='doccomment'>//! Then, you can use that parser to examine some input. In the typical</span>
-<span class='doccomment'>//! case, you can invoke a type-specific parse method like `parse_boolean`.</span>
-<span class='doccomment'>//!</span>
-<span class='doccomment'>//! ```</span>
-<span class='doccomment'>//! # use humanize::HumanizedParser;</span>
-<span class='doccomment'>//! #</span>
-<span class='doccomment'>//! # let parser = HumanizedParser::new();</span>
-<span class='doccomment'>//! let enabled = parser.parse_boolean(&quot;on&quot;).unwrap_or(false);</span>
+<span class='doccomment'>//! let enabled = humanize::parse::&lt;bool&gt;(&quot;on&quot;).unwrap_or(false);</span>
 <span class='doccomment'>//! assert_eq!(enabled, true);</span>
 <span class='doccomment'>//! ```</span>
-<span class='doccomment'>//!</span>
-<span class='doccomment'>//! The parser stores no state related to an actual parse operation. It</span>
-<span class='doccomment'>//! simply stores the matchers which have been registered, so this can</span>
-<span class='doccomment'>//! and should be cached and used across multiple parse operations.</span>
 <span class='doccomment'>//!</span>
 <span class='doccomment'>//! # Ideas for the Future</span>
 <span class='doccomment'>//!</span>
 <span class='doccomment'>//! * Actually implement formatting.</span>
-<span class='doccomment'>//! * Color input. Allow inputting a color using a wide variety of color</span>
-<span class='doccomment'>//!   names, such as those from CSS.</span>
 <span class='doccomment'>//!</span>
 <span class='doccomment'>//! [humanize library]: https://pypi.python.org/pypi/humanize</span>
 <span class='doccomment'>//! [moment.js]: http://momentjs.com/</span>
@@ -195,10 +155,10 @@
 <span class='attribute'>#[<span class='ident'>macro_use</span>]</span>
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>language_tags</span>;
 
-<span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>matchers</span>;
+<span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>boolean</span>;
 <span class='kw'>mod</span> <span class='ident'>parser</span>;
 
-<span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>parser</span>::<span class='ident'>HumanizedParser</span>;
+<span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>parser</span>::{<span class='ident'>parse</span>, <span class='ident'>parse_with_language</span>, <span class='ident'>Parse</span>};
 </pre>
 </section>
     <section id='search' class="content hidden"></section>
