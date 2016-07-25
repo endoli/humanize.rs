@@ -6,6 +6,7 @@ license = "MIT/Apache-2.0"
 readme = "README.md"
 description = "Convert common things to humanized output. Parse input text in a human-friendly way."
 keywords = ["humanize", "human", "parse", "format"]
+documentation = "https://endoli.github.io/humanize.rs"
 homepage = "https://github.com/endoli/humanize.rs"
 repository = "https://github.com/endoli/humanize.rs"
 
