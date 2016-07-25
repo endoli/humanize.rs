@@ -31,30 +31,14 @@
 //! to be able to input a `bool` using text like `"on"`, `"off"`,
 //! `"yes"`, `"no"` or perhaps even `"nope"`.
 //!
-//! First, you'll want to construct a parser:
-//!
 //! ```
-//! let parser = humanize::Parser::new();
-//! ```
-//!
-//! Then, you can use that parser to examine some input. In the typical
-//! case, you can invoke a type-specific parse method like `parse_boolean`.
-//!
-//! ```
-//! let parser = humanize::Parser::new();
-//! let enabled = parser.parse_boolean("on").unwrap_or(false);
+//! let enabled = humanize::parse::<bool>("on").unwrap_or(false);
 //! assert_eq!(enabled, true);
 //! ```
-//!
-//! The parser stores no state related to an actual parse operation. It
-//! simply stores the matchers which have been registered, so this can
-//! and should be cached and used across multiple parse operations.
 //!
 //! # Ideas for the Future
 //!
 //! * Actually implement formatting.
-//! * Color input. Allow inputting a color using a wide variety of color
-//!   names, such as those from CSS.
 //!
 //! [humanize library]: https://pypi.python.org/pypi/humanize
 //! [moment.js]: http://momentjs.com/
@@ -68,7 +52,7 @@
 #[macro_use]
 extern crate language_tags;
 
-pub mod matchers;
+pub mod boolean;
 mod parser;
 
-pub use parser::Parser;
+pub use parser::{parse, parse_with_language, Parse};
