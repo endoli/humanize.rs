@@ -2,7 +2,7 @@
 name = "humanize"
 version = "0.0.1"
 authors = ["Bruce Mitchener <bruce.mitchener@gmail.com>"]
-license = "MIT/Apache-2.0"
+license = "MIT OR Apache-2.0"
 readme = "README.md"
 description = "Convert common things to humanized output. Parse input text in a human-friendly way."
 keywords = ["humanize", "human", "parse", "format"]
