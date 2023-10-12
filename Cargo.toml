@@ -9,6 +9,7 @@ keywords = ["humanize", "human", "parse", "format"]
 documentation = "https://endoli.github.io/humanize.rs"
 homepage = "https://github.com/endoli/humanize.rs"
 repository = "https://github.com/endoli/humanize.rs"
+edition = "2018"
 
 [dependencies]
 language-tags = "0.2.2"

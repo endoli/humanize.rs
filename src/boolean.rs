@@ -27,8 +27,8 @@
 //! * `"nope"`
 //! * `"off"`
 
-use language_tags::LanguageTag;
-use super::parser::Parse;
+use crate::Parse;
+use language_tags::{langtag, LanguageTag};
 
 impl Parse for bool {
     fn parse(text: &str, language: &LanguageTag) -> Option<bool> {
@@ -45,7 +45,8 @@ impl Parse for bool {
 
 #[cfg(test)]
 mod tests {
-    use {parse, parse_with_language};
+    use crate::{parse, parse_with_language};
+    use language_tags::langtag;
 
     #[test]
     fn basic() {

@@ -49,10 +49,7 @@
         unsafe_code, unstable_features,
         unused_import_braces, unused_qualifications)]
 
-#[macro_use]
-extern crate language_tags;
-
 pub mod boolean;
 mod parser;
 
-pub use parser::{parse, parse_with_language, Parse};
+pub use crate::parser::{parse, parse_with_language, Parse};
