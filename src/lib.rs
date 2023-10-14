@@ -22,7 +22,7 @@
 //! * The ['at' command]'s input parsing.
 //!
 //! Contributions extending our functionality are welcome, as are
-//! contributions that add support for additional languages.
+//! contributions that add support for additional languages / locales.
 //!
 //! # Human-friendly Parsing
 //!
@@ -56,4 +56,4 @@
 pub mod boolean;
 mod parser;
 
-pub use crate::parser::{parse, parse_or, parse_with_language, parse_with_language_or, Parse};
+pub use crate::parser::{parse, parse_or, parse_with_locale, parse_with_locale_or, Parse};

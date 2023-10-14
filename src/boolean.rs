@@ -8,7 +8,7 @@
 //!
 //! ## Parsing
 //!
-//! For all languages, we support parsing `"1"` and `"0"` as `true`
+//! For all locales, we support parsing `"1"` and `"0"` as `true`
 //! and `false` respectively.
 //!
 //! In English, these lexical values map to `true`:
@@ -28,16 +28,20 @@
 //! * `"off"`
 
 use crate::Parse;
-use language_tags::{langtag, LanguageTag};
+use icu_locid::{locale, Locale};
+
+fn locale_matches(left: &Locale, right: &Locale) -> bool {
+    (*left == *right) || (*left == Locale::UND) || (*right == Locale::UND)
+}
 
 impl Parse for bool {
-    fn parse(text: &str, language: &LanguageTag) -> Option<bool> {
-        let en = langtag!(en);
+    fn parse(text: &str, locale: &Locale) -> Option<bool> {
+        let en = locale!("en");
         match &*text.to_lowercase() {
             "1" => Some(true),
             "0" => Some(false),
-            "ok" | "okay" | "on" | "true" | "yep" | "yes" if language.matches(&en) => Some(true),
-            "false" | "no" | "nope" | "off" if language.matches(&en) => Some(false),
+            "ok" | "okay" | "on" | "true" | "yep" | "yes" if locale_matches(locale, &en) => Some(true),
+            "false" | "no" | "nope" | "off" if locale_matches(locale, &en) => Some(false),
             _ => None,
         }
     }
@@ -45,8 +49,8 @@ impl Parse for bool {
 
 #[cfg(test)]
 mod tests {
-    use crate::{parse, parse_with_language};
-    use language_tags::langtag;
+    use crate::{parse, parse_with_locale};
+    use icu_locid::locale;
 
     #[test]
     fn basic() {
@@ -64,10 +68,10 @@ mod tests {
         assert_eq!(Some(false), parse::<bool>("nope"));
         assert_eq!(Some(false), parse::<bool>("off"));
 
-        let badlang = langtag!("no");
-        assert_eq!(Some(true), parse_with_language::<bool>("1", &badlang));
-        assert_eq!(Some(false), parse_with_language::<bool>("0", &badlang));
-        assert_eq!(None, parse_with_language::<bool>("okay", &badlang));
-        assert_eq!(None, parse_with_language::<bool>("nope", &badlang));
+        let bad_locale = locale!("no");
+        assert_eq!(Some(true), parse_with_locale::<bool>("1", &bad_locale));
+        assert_eq!(Some(false), parse_with_locale::<bool>("0", &bad_locale));
+        assert_eq!(None, parse_with_locale::<bool>("okay", &bad_locale));
+        assert_eq!(None, parse_with_locale::<bool>("nope", &bad_locale));
     }
 }

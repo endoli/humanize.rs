@@ -12,4 +12,4 @@ repository = "https://github.com/endoli/humanize.rs"
 edition = "2021"
 
 [dependencies]
-language-tags = "0.2.2"
+icu_locid = "1"
