@@ -40,7 +40,9 @@ impl Parse for bool {
         match &*text.to_lowercase() {
             "1" => Some(true),
             "0" => Some(false),
-            "ok" | "okay" | "on" | "true" | "yep" | "yes" if locale_matches(locale, &en) => Some(true),
+            "ok" | "okay" | "on" | "true" | "yep" | "yes" if locale_matches(locale, &en) => {
+                Some(true)
+            }
             "false" | "no" | "nope" | "off" if locale_matches(locale, &en) => Some(false),
             _ => None,
         }
