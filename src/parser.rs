@@ -6,13 +6,13 @@
 
 use icu_locid::Locale;
 
-/// Construct `Self` by parsing humanized text.
+/// Construct `Self` by parsing humanized `text`.
 pub trait Parse: Sized {
     /// Perform the conversion.
     fn parse(text: &str, locale: Option<&Locale>) -> Option<Self>;
 }
 
-/// Construct a value by parsing humanized text.
+/// Construct a value by parsing humanized `text`.
 pub fn parse<T: Parse>(text: &str, locale: Option<&Locale>) -> Option<T> {
     T::parse(text, locale)
 }
