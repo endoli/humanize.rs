@@ -39,6 +39,10 @@
 //! assert_eq!(enabled, true);
 //! ```
 //!
+//! # Support for `no_std`
+//!
+//! By default, this crate works without the Rust standard library.
+//!
 //! # Ideas for the Future
 //!
 //! * Actually implement formatting.
@@ -47,6 +51,7 @@
 //! [moment.js]: http://momentjs.com/
 //! ['at' command]: http://www.computerhope.com/unix/uat.htm
 
+#![no_std]
 #![warn(missing_docs)]
 #![deny(
     trivial_numeric_casts,

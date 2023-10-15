@@ -40,3 +40,19 @@ jobs:
 
       - name: cargo test
         run: cargo test
+
+  test-no-std:
+    runs-on: ubuntu-latest
+    name: cargo build no_std
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: install stable toolchain
+        uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: stable
+          target: thumbv6m-none-eabi
+          components: clippy
+
+      - name: cargo build
+        run: cargo build --target=thumbv6m-none-eabi
