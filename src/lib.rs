@@ -32,6 +32,9 @@
 //! `"yes"`, `"no"` or perhaps even `"nope"`.
 //!
 //! ```
+//! let enabled = humanize::parse::<bool>("yes", None);
+//! assert_eq!(enabled, Some(true));
+//!
 //! let enabled = humanize::parse_or::<bool>("on", None, false);
 //! assert_eq!(enabled, true);
 //! ```
