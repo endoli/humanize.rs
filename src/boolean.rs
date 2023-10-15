@@ -30,12 +30,18 @@
 use crate::Parse;
 use icu_locid::{locale, Locale};
 
-fn locale_matches(left: &Locale, right: &Locale) -> bool {
-    (*left == *right) || (*left == Locale::UND) || (*right == Locale::UND)
+fn locale_matches(left: Option<&Locale>, right: &Locale) -> bool {
+    if *right == Locale::UND {
+        true
+    } else if let Some(left) = left {
+        *left == *right
+    } else {
+        true
+    }
 }
 
 impl Parse for bool {
-    fn parse(text: &str, locale: &Locale) -> Option<bool> {
+    fn parse(text: &str, locale: Option<&Locale>) -> Option<bool> {
         let en = locale!("en");
         match &*text.to_lowercase() {
             "1" => Some(true),
@@ -51,29 +57,29 @@ impl Parse for bool {
 
 #[cfg(test)]
 mod tests {
-    use crate::{parse, parse_with_locale};
+    use crate::parse;
     use icu_locid::locale;
 
     #[test]
     fn basic() {
-        assert_eq!(Some(true), parse::<bool>("1"));
-        assert_eq!(Some(true), parse::<bool>("ok"));
-        assert_eq!(Some(true), parse::<bool>("okay"));
-        assert_eq!(Some(true), parse::<bool>("on"));
-        assert_eq!(Some(true), parse::<bool>("true"));
-        assert_eq!(Some(true), parse::<bool>("yep"));
-        assert_eq!(Some(true), parse::<bool>("yes"));
+        assert_eq!(Some(true), parse::<bool>("1", None));
+        assert_eq!(Some(true), parse::<bool>("ok", None));
+        assert_eq!(Some(true), parse::<bool>("okay", None));
+        assert_eq!(Some(true), parse::<bool>("on", None));
+        assert_eq!(Some(true), parse::<bool>("true", None));
+        assert_eq!(Some(true), parse::<bool>("yep", None));
+        assert_eq!(Some(true), parse::<bool>("yes", None));
 
-        assert_eq!(Some(false), parse::<bool>("0"));
-        assert_eq!(Some(false), parse::<bool>("false"));
-        assert_eq!(Some(false), parse::<bool>("no"));
-        assert_eq!(Some(false), parse::<bool>("nope"));
-        assert_eq!(Some(false), parse::<bool>("off"));
+        assert_eq!(Some(false), parse::<bool>("0", None));
+        assert_eq!(Some(false), parse::<bool>("false", None));
+        assert_eq!(Some(false), parse::<bool>("no", None));
+        assert_eq!(Some(false), parse::<bool>("nope", None));
+        assert_eq!(Some(false), parse::<bool>("off", None));
 
         let bad_locale = locale!("no");
-        assert_eq!(Some(true), parse_with_locale::<bool>("1", &bad_locale));
-        assert_eq!(Some(false), parse_with_locale::<bool>("0", &bad_locale));
-        assert_eq!(None, parse_with_locale::<bool>("okay", &bad_locale));
-        assert_eq!(None, parse_with_locale::<bool>("nope", &bad_locale));
+        assert_eq!(Some(true), parse::<bool>("1", Some(&bad_locale)));
+        assert_eq!(Some(false), parse::<bool>("0", Some(&bad_locale)));
+        assert_eq!(None, parse::<bool>("okay", Some(&bad_locale)));
+        assert_eq!(None, parse::<bool>("nope", Some(&bad_locale)));
     }
 }

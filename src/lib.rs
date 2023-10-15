@@ -32,7 +32,7 @@
 //! `"yes"`, `"no"` or perhaps even `"nope"`.
 //!
 //! ```
-//! let enabled = humanize::parse_or::<bool>("on", false);
+//! let enabled = humanize::parse_or::<bool>("on", None, false);
 //! assert_eq!(enabled, true);
 //! ```
 //!
@@ -56,4 +56,4 @@
 pub mod boolean;
 mod parser;
 
-pub use crate::parser::{parse, parse_or, parse_with_locale, parse_with_locale_or, Parse};
+pub use crate::parser::{parse, parse_or, Parse};

@@ -9,38 +9,16 @@ use icu_locid::Locale;
 /// Construct `Self` by parsing humanized text.
 pub trait Parse: Sized {
     /// Perform the conversion.
-    fn parse(text: &str, locale: &Locale) -> Option<Self>;
+    fn parse(text: &str, locale: Option<&Locale>) -> Option<Self>;
 }
 
 /// Construct a value by parsing humanized text.
-///
-/// This uses a wild card for the locale, so text in any locale
-/// supported by the library should work.
-pub fn parse<T: Parse>(text: &str) -> Option<T> {
-    let locale = Locale::default();
-    T::parse(text, &locale)
+pub fn parse<T: Parse>(text: &str, locale: Option<&Locale>) -> Option<T> {
+    T::parse(text, locale)
 }
 
 /// Construct a value by parsing humanized `text`, with a `default`
 /// value when parsing fails.
-///
-/// This uses a wild card for the locale, so text in any locale
-/// supported by the library should work.
-pub fn parse_or<T: Parse>(text: &str, default: T) -> T {
-    parse::<T>(text).unwrap_or(default)
-}
-
-/// Construct a value by parsing humanized `text` using the specified [`locale`].
-///
-/// [`locale`]: Locale
-pub fn parse_with_locale<T: Parse>(text: &str, locale: &Locale) -> Option<T> {
-    T::parse(text, locale)
-}
-
-/// Construct a value by parsing humanized `text` using the specified [`locale`],
-/// with a `default` value when parsing fails.
-///
-/// [`locale`]: Locale
-pub fn parse_with_locale_or<T: Parse>(text: &str, locale: &Locale, default: T) -> T {
-    T::parse(text, locale).unwrap_or(default)
+pub fn parse_or<T: Parse>(text: &str, locale: Option<&Locale>, default: T) -> T {
+    parse::<T>(text, locale).unwrap_or(default)
 }
